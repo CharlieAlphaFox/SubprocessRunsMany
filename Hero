@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+import subprocess
+import time
+import os
+import signal
+import traceback
+
+
+call_str = subprocess.run("python3 Savings.py & python3 Trader.py & python3 CM.py", shell=True, preexec_fn=os.setsid)
+
+proc = subprocess.Popen(call_str)
+
+
+while proc.poll() is None:
+    time.sleep(1)
+    subprocess.run("python3 Savings2.py & python3 Bsavings.py & python3 CM.py", shell=True, preexec_fn=os.setsid)
